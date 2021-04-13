@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.github.drsmugleaf.intellijfluentsupportplugin</id>
-    <name>intellij-fluent-support-plugin</name>
+    <name>intellij-fluent-support</name>
     <vendor>drsmugleaf</vendor>
 
     <!-- Product and plugin compatibility requirements -->
@@ -8,12 +8,18 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <fileType name="Fluent File" implementationClass="com.github.drsmugleaf.intellijfluentsupportplugin.language.FluentFileType" fieldName="INSTANCE"
+                  language="Fluent" extensions="fluent"/>
         <applicationService serviceImplementation="com.github.drsmugleaf.intellijfluentsupportplugin.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.drsmugleaf.intellijfluentsupportplugin.services.MyProjectService"/>
+        <projectService serviceImplementation="com.github.drsmugleaf.intellijfluentsupportplugin.services.FluentProjectService"/>
+        <lang.syntaxHighlighterFactory language="Fluent"
+                                       implementationClass="com.github.drsmugleaf.intellijfluentsupportplugin.language.FluentSyntaxHighlighterFactory"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.drsmugleaf.intellijfluentsupportplugin.listeners.MyProjectManagerListener"
+        <listener class="com.github.drsmugleaf.intellijfluentsupportplugin.listeners.FluentProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <idea-version since-build="201"/>
 </idea-plugin>
